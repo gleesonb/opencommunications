@@ -1,0 +1,329 @@
+/* ==========================================================================
+   Open Communications — stylesheet
+   Responsive rewrite. No framework, no build step.
+   ========================================================================== */
+
+/* --- Design tokens ------------------------------------------------------- */
+:root {
+  --maroon:        #5e163a;
+  --maroon-dark:   #4a0f2d;
+  --maroon-light:  #7a1f4d;
+  --accent:        #993366;
+  --accent-link:   #7a2547;   /* darkened from #a83e7c for AA contrast on white */
+  --text:          #54565a;   /* darkened from #5e6060 for >=4.5:1 on white */
+  --text-muted:    #6f7174;
+  --rule:          #d8d8d8;
+  --page-bg:       #ececec;
+  --shell-bg:      #ffffff;
+  --shell-max:     960px;
+  --gutter:        20px;
+  --focus:         #ffd54f;   /* high-vis on both light and dark surfaces */
+  --font-head:     Georgia, "Times New Roman", serif;
+  --font-body:     Arial, Helvetica, sans-serif;
+}
+
+/* --- Reset / base -------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--page-bg) url("/assets/img/bg.png");
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--accent-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 { font-family: var(--font-head); font-weight: normal; color: var(--maroon); }
+h1 { font-size: 30px; margin: 0 0 .5em; }
+h2 { font-size: 22px; margin: 0 0 .4em; }
+
+p { margin: 0 0 1em; }
+ul, ol { margin: 0 0 1em; padding-left: 1.3em; }
+
+/* Focus: high-visibility outline that reads on both light content and dark nav */
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+/* --- Skip link (keyboard users jump to content) ------------------------- */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--maroon);
+  color: #fff;
+  font-family: var(--font-head);
+  border-radius: 0 0 4px 4px;
+  transition: top .15s ease;
+}
+.skip-link:focus { top: 0; }
+
+/* --- Top accent bars ----------------------------------------------------- */
+.bar { height: 8px; background: var(--maroon); }
+
+/* --- Shell (centred page frame) ----------------------------------------- */
+.shell {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  background: var(--shell-bg);
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  box-shadow: 0 0 12px rgba(0, 0, 0, .12);
+}
+
+/* --- Header -------------------------------------------------------------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px var(--gutter);
+}
+.site-header .brand img { width: 360px; max-width: 70vw; }
+.header-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-size: 16px;
+  color: var(--maroon);
+}
+.header-email img { width: 22px; height: 22px; }
+.header-email:hover { text-decoration: none; color: var(--accent); }
+
+/* --- Primary nav --------------------------------------------------------- */
+.nav-wrap { background: var(--maroon); }
+
+/* CSS-only mobile toggle (no JS) */
+.nav-toggle-input { display: none; }
+.nav-toggle {
+  display: none;
+  width: 100%;
+  padding: 14px var(--gutter);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 17px;
+  text-align: left;
+  cursor: pointer;
+  background: var(--maroon-dark);
+}
+.nav-toggle::after { content: " ☰"; float: right; }
+
+.primary-nav > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.primary-nav > ul > li { position: relative; }
+.primary-nav > ul > li > a {
+  display: block;
+  padding: 14px 18px;
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 17px;
+}
+.primary-nav > ul > li > a:hover,
+.primary-nav > ul > li > a:focus { background: var(--maroon-light); text-decoration: none; }
+.primary-nav li.is-active > a,
+.primary-nav > ul > li.is-active > a { background: var(--accent); }
+
+/* Dropdown */
+.dropdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background: var(--maroon-dark);
+  display: none;
+  z-index: 20;
+}
+.has-dropdown:hover > .dropdown,
+.has-dropdown:focus-within > .dropdown { display: block; }
+.dropdown li a {
+  display: block;
+  padding: 11px 16px;
+  color: #fff;
+  font-size: 14px;
+}
+.dropdown li a:hover { background: var(--accent); }
+.dropdown li.is-active > a { background: var(--accent); }
+
+/* --- Main content -------------------------------------------------------- */
+.content { padding: 8px var(--gutter) 30px; }
+.content > .lead-h1 { margin-top: 8px; }
+
+.main_content { max-width: 620px; }
+.main_content p, .approach-content p, .clients-content p, .team_content p { font-size: 14px; }
+
+/* Accent-coloured list (What we do service list) */
+.accent-list { list-style: none; padding-left: 0; }
+.accent-list li { color: var(--accent); font-weight: bold; padding-left: 1.4em; position: relative; }
+.accent-list li::before { content: "›"; position: absolute; left: 0; }
+
+/* Principles (Our Approach) */
+.principles { list-style: none; padding: 0; margin: 0 0 1em; }
+.principles > li { padding: 4px 0; }
+.principles h2 { margin: 1.2em 0 .15em; color: var(--accent); font-size: 18px; font-weight: bold; font-family: var(--font-body); }
+
+/* --- Callout (purple box) ----------------------------------------------- */
+.callout {
+  background: var(--maroon) url("/assets/img/box-bg-purple.png") center / cover;
+  color: #fff;
+  padding: 20px;
+  max-width: 300px;
+  font-size: 14px;
+  margin: 18px 0;
+}
+@media (min-width: 720px) {
+  .layout-two {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+  }
+  .layout-two .layout-main { flex: 1 1 60%; }
+  .layout-two .callout { flex: 0 0 300px; margin: 0; }
+}
+
+/* --- Button -------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  background: var(--maroon);
+  color: #fff !important;
+  padding: 12px 26px;
+  font-family: var(--font-head);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.btn:hover { background: var(--accent); text-decoration: none; }
+
+/* --- Homepage hero carousel --------------------------------------------- */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  background: #1a1a1a;
+  aspect-ratio: 2 / 1;
+}
+.carousel-track { position: absolute; inset: 0; }
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+.slide.is-active { opacity: 1; }
+.slide img { width: 100%; height: 100%; object-fit: cover; }
+.slide-text {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 20px 24px;
+  width: 100%;
+  color: #fff;
+  font-family: var(--font-head);
+  font-weight: normal;
+  font-size: clamp(16px, 3vw, 24px);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, .8);
+  background: linear-gradient(transparent, rgba(0, 0, 0, .55));
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .75);
+  color: var(--maroon);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-btn:hover { background: #fff; }
+.carousel-btn[data-prev] { left: 12px; }
+.carousel-btn[data-next] { right: 12px; }
+
+/* --- Contact page -------------------------------------------------------- */
+.contact-grid { margin-top: 8px; }
+.contact-card { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; max-width: 560px; }
+.contact-card .contact-pic img { width: 110px; height: 110px; border-radius: 4px; }
+.contact-card .contact-detail { font-family: var(--font-head); color: var(--maroon); }
+.contact-card .contact-name { font-weight: bold; font-size: 18px; display: block; }
+.contact-card .contact-line { display: block; color: var(--text); font-family: var(--font-body); font-size: 14px; }
+.contact-card .contact-email a { color: var(--accent-link); }
+.contact-card .linkedin img { width: 20px; height: 20px; vertical-align: middle; margin-left: 6px; }
+.contact-card .linkedin:hover img { content: url("/assets/img/linkedin-hov.png"); }
+
+/* --- Footer -------------------------------------------------------------- */
+/* footer-bg.png is a speckled texture (pure-white pixels scattered through),
+   so a dark overlay is layered over it to give the light text a uniform,
+   high-contrast backing everywhere. */
+.site-footer {
+  background-color: var(--maroon);
+  background-image:
+    linear-gradient(rgba(74, 15, 45, 0.82), rgba(74, 15, 45, 0.82)),
+    url("/assets/img/footer-bg.png");
+  background-size: cover;
+  background-position: center bottom;
+  color: #fff;
+  padding: 24px var(--gutter);
+  text-align: center;
+}
+.site-footer .footer-name { font-family: var(--font-head); font-size: 20px; }
+.site-footer .footer-reg { font-size: 12px; color: #fff; margin: 4px 0 10px; }
+.site-footer .footer-credit { font-size: 12px; color: #fff; }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 719px) {
+  h1 { font-size: 25px; }
+  .site-header { padding: 18px var(--gutter); }
+  .site-header .brand img { width: 100%; max-width: 320px; }
+
+  /* mobile nav: hamburger reveals the (stacked) menu */
+  .nav-toggle { display: block; }
+  .nav-toggle-input { display: block; position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .nav-toggle-input:focus-visible + .nav-toggle { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .primary-nav { display: none; }
+  .nav-toggle-input:checked ~ .primary-nav { display: block; }
+  .primary-nav > ul { flex-direction: column; }
+  .primary-nav > ul > li { width: 100%; }
+  .dropdown {
+    position: static;
+    display: block;
+    background: var(--maroon-dark);
+    padding-left: 12px;
+  }
+
+  .contact-card { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

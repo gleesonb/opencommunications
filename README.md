@@ -1,46 +1,39 @@
-# opencommunications
+# Open Communications
 
-None
+Static marketing website for **Open Communications**, a strategic marketing
+consultancy based in Dublin. Served as flat files (Cloudflare Pages).
 
-## Project Overview
+## Structure
 
-This project appears to be a **JavaScript Application**. It is primarily written in HTML and was last updated on 2022-06-25 14:40:41+00:00.
-
-## Repository Statistics
-- Stars: 0
-- Forks: 0
-
-## Key Features
-- No automated tests detected
-- No CI/CD configuration detected
-- No Dockerfile detected
-- No license file detected
-
-## File Structure
 ```
-index.html
-contact-us/index.html
-feed/index.xml
-our-approach/index.html
-our-clients/index.html
-our-team/index.html
-what-we-do/index.html
-what-we-do/agency-selection-and-pitch-management/index.html
-what-we-do/integrated-communications-planning/index.html
-what-we-do/media-auditing/index.html...
+index.html                              Home (hero carousel)
+contact-us/index.html                   Contact (email only)
+our-approach/index.html                 Our Approach
+our-clients/index.html                  Our Clients
+what-we-do/index.html                   What we do (overview)
+what-we-do/agency-selection-and-pitch-management/
+what-we-do/integrated-communications-planning/
+what-we-do/media-auditing/
+assets/css/app.css                      Responsive stylesheet
+assets/js/carousel.js                   Vanilla-JS hero carousel (home only)
+assets/img/…                            Logo, textures, slideshow, headshots
 ```
 
-## Main Technologies
-- .png: 27 file(s)
-- .html: 9 file(s)
-- .js: 5 file(s)
-- .css: 3 file(s)
-- .xml: 1 file(s)
+## Notes
 
-## Dependencies
+- **No build step.** Pages are hand-authored static HTML sharing identical
+  `<head>` / header / nav / footer blocks. Edit those blocks consistently across
+  the 8 files (there is no templating layer by design).
+- **Analytics:** Google Analytics 4, measurement ID `G-4WT5LJCQLD`, on every page.
+- **Contact:** email only (no form) — `mailto:` links.
 
+## Run locally
 
-## Existing README Content
+```bash
+python3 -m http.server 8000
+# open http://localhost:8000
+```
 
-No existing README found.
+## Deploy
 
+Push the branch. Cloudflare Pages serves the repo root as-is (no build command).
